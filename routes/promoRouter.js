@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const dishRouter = express.Router();
+const promoRouter = express.Router();
 
-dishRouter.use(bodyParser.json());
+promoRouter.use(bodyParser.json());
 
-dishRouter.route('/')
+promoRouter.route('/')
 // all: the code will be executed no matter is GET, POST, PUT
 .all((req, res, next) => {
 	res.statusCode = 200;
@@ -13,38 +13,38 @@ dishRouter.route('/')
 	next(); // look for below specifications matching this endpoint
 })
 .get((req, res, next) => {
-	res.end('Will send all the dishes to you!');
+	res.end('Will send all the promos to you!');
 })
 .post((req, res, next) => {
-	res.end('Will add the dish: ' + req.body.name +
+	res.end('Will add the promo: ' + req.body.name +
 		' with details: ' + req.body.description);
 })
 .put((req, res, next) => {
 	res.statusCode = 403;
-	res.end('PUT operation not supported on /dishes');
+	res.end('PUT operation not supported on /promos');
 })
 .delete((req, res, next) => {
-	res.end('Deleting all the dishes');
+	res.end('Deleting all the promos');
 });
 
-dishRouter.route('/:dishId')
+promoRouter.route('/:promoId')
 .get((req, res, next) => {
-	res.end('Will send details of the dish: '
-		+ req.params.dishId + ' to you!');
+	res.end('Will send details of the promo: '
+		+ req.params.promoId + ' to you!');
 })
 .post((req, res, next) => {
 	res.statusCode = 403;
-	res.end('POST operation not supported on /dishes/'
-		+ req.params.dishId);
+	res.end('POST operation not supported on /promos/'
+		+ req.params.promoId);
 })
 .put((req, res, next) => {
-	res.write('Updating the dish: '
-		+ req.params.dishId + '\n') // add a line to the reply message
-	res.end('Will update the dish: '
+	res.write('Updating the promo: '
+		+ req.params.promoId + '\n') // add a line to the reply message
+	res.end('Will update the promo: '
 		+ req.body.name + ' with details: ' + req.body.description);
 })
 .delete((req, res, next) => {
-	res.end('Deleting dish: ' + req.params.dishId);
+	res.end('Deleting promo: ' + req.params.promoId);
 });
 
-module.exports  = dishRouter;
+module.exports  = promoRouter;
